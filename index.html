@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Planejador de Casa</title>
+    <title>House Planner</title>
     <style>
         :root {
             --cell: 9px;
@@ -853,7 +853,7 @@
         //  I18N — Translation System
         // ============================================================
         const I18N = {
-            current: 'pt',
+            current: 'en', // default language set to English
             translations: {
                 pt: {
                     appTitle: 'Planejador de Casa',
@@ -895,7 +895,6 @@
                     viewerHint: 'Arraste para girar · roda para aproximar',
                     roomsCountLabel: 'Cômodos: {count} / 25',
                     totalLabel: 'Total: {total}',
-                    // shape names
                     shapeSquare: 'Quadrado',
                     shapeSquareSmall: 'Quadrado (peq.)',
                     shapeSquareLarge: 'Quadrado (grande)',
@@ -908,7 +907,6 @@
                     shapeEndRounded: 'Extremidade (arred.)',
                     shapeCornerRounded: 'Canto (arred.)',
                     shapeCorner: 'Canto',
-                    // status messages
                     statusSaved: 'Layout salvo automaticamente.',
                     statusRestoreFailed: 'O layout salvo não pôde ser restaurado.',
                     statusInvalidCode: 'Este não parece ser um código do POH Planner.',
@@ -932,9 +930,7 @@
                     statusImportError: 'Não foi possível importar este código.',
                     statusColumnMove: 'Uma coluna com andares superiores pode ser deslocada, mas não girada em conjunto.',
                     statusAddRoomFirst: 'Adicione ao menos um cômodo antes de mover o lote.',
-                    // dialog
                     closeLabel: 'Fechar',
-                    // opening tooltips
                     doorWindow: 'Janela',
                     doorArch: 'Arco',
                     doorWall: 'Parede lisa',
@@ -1463,8 +1459,13 @@
                 const saved = localStorage.getItem('poh-planner-lang');
                 if (saved && I18N.translations[saved]) {
                     I18N.current = saved;
+                } else {
+                    // default to English if no preference saved
+                    I18N.current = 'en';
                 }
-            } catch (_) {}
+            } catch (_) {
+                I18N.current = 'en';
+            }
             applyTranslations();
         }
 
